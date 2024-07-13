@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\Payment\StripeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->group(function () {
@@ -25,6 +25,10 @@ Route::prefix('/v1')->group(function () {
             Route::put('/posts/{id}', 'update');
             Route::get('/posts/{id}', 'show');
             Route::delete('/posts/{id}', 'destroy');
+        });
+        Route::controller(CommentController::class)->group(function () {
+            Route::get('/posts/{postId}/comments', 'getComments');
+            Route::post('/posts/{postId}/comments', 'createComment');
         });
     });
 });

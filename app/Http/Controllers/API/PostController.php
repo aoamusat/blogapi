@@ -21,7 +21,7 @@ class PostController extends BaseController
             return response()->json(['posts' => $posts]);
         } catch (\Throwable $e) {
             Log::error($e->getMessage());
-            return response()->json(['message' => "Internal server error"]);
+            return response()->json(['message' => "Internal server error"], 500);
         }
     }
 
@@ -53,7 +53,7 @@ class PostController extends BaseController
             return $this->sendResponse($post, "Post created successfully", 201);
         } catch (\Throwable $e) {
             Log::error($e->getMessage());
-            return response()->json(['message' => "Internal server error"]);
+            return response()->json(['message' => "Internal server error"], 500);
         }
     }
 
