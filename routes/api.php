@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\Payment\StripeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->group(function () {
+    Route::post('/stripe/webhook', [StripeController::class, 'stripeWebhook']);
     Route::controller(AuthController::class)->group(function () {
         Route::post('/register', 'register');
         Route::post('/login', 'login');
