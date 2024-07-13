@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Summary of AuthController
@@ -79,8 +80,13 @@ class AuthController extends BaseController
      */
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        try {
+            $request->user()->tokens()->delete();
 
-        return response()->json(['message' => 'Successfully logged out']);
+            return response()->json(['message' => 'Successfully logged out']);
+        } catch (\Throwable $e) {
+            Log::error("LOGOUT_ERROR: " . $e->getMessage());
+            return $this->sendError("Logout error", [], 500);
+        }
     }
 }
