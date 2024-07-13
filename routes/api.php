@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\Payment\StripeController;
 use Illuminate\Http\Request;
@@ -16,5 +17,14 @@ Route::prefix('/v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/profile', [UserController::class, 'profile']);
         Route::post('/logout', [AuthController::class, 'logout']);
+
+        // POST Routes
+        Route::controller(PostController::class)->group(function () {
+            Route::get('/posts', 'index');
+            Route::post('/posts', 'store');
+            Route::put('/posts/{id}', 'update');
+            Route::get('/posts/{id}', 'show');
+            Route::delete('/posts/{id}', 'destroy');
+        });
     });
 });
