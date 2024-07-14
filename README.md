@@ -16,6 +16,13 @@ This is the backend for a personal blog application built with Laravel. It inclu
       - [1. Environment Variables](#1-environment-variables)
   - [Database Migrations](#database-migrations)
   - [Running the Application](#running-the-application)
+  - [API Endpoints](#api-endpoints)
+    - [Authentication](#authentication)
+    - [Blog Posts](#blog-posts)
+    - [Comments](#comments)
+    - [User Profile](#user-profile)
+    - [Stripe](#stripe)
+    - [Miscellaneous](#miscellaneous)
 
 ## Features
 
@@ -68,3 +75,37 @@ Start the Laravel development server:
 ```bash
 php artisan serve
 ```
+
+## API Endpoints
+
+### Authentication
+
+- `POST /api/v1/login` - Log in a user
+- `POST /api/v1/logout` - Log out the current user
+- `POST /api/v1/register` - Register a new user 
+
+### Blog Posts
+
+- `GET /api/v1/posts` - List all posts 
+- `POST /api/v1/posts` - Create a new post 
+- `PUT /api/v1/posts/{id}` - Update a post 
+- `GET /api/v1/posts/{id}` - Get a specific post 
+- `DELETE /api/v1/posts/{id}` - Delete a post 
+
+### Comments
+
+- `GET /api/v1/posts/{postId}/comments` - List comments for a post
+- `POST /api/v1/posts/{postId}/comments` - Add a comment to a post
+
+### User Profile
+
+- `GET /api/v1/profile` - Get authenticated user's profile 
+
+### Stripe
+
+- `POST /api/v1/stripe/webhook` - Handle Stripe webhook 
+
+### Miscellaneous
+
+- `GET /health` - Health check endpoint
+- `GET /sanctum/csrf-cookie` - Get CSRF token
